@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appcalorias.databinding.ActivityNuevaComidaBinding;
+import com.example.appcalorias.model.ComidaBebida;
 
 public class NuevaComidaActivity extends AppCompatActivity {
 
@@ -28,8 +29,23 @@ public class NuevaComidaActivity extends AppCompatActivity {
             return insets;
         });*/
 
+        //Funcionalidad del boton regresar
         binding.btnBack.setOnClickListener(view -> {
             Intent comidas = new Intent(this,ComidasActivity.class);
+            startActivity(comidas);
+        });
+
+        //Envio de comidaBebida con sus respectivos datos a comidasActivity
+        binding.btnCrearProducto.setOnClickListener(view -> {
+            String nombreComida = String.valueOf(binding.etNombre.getText());
+            String cantidadCalorias = String.valueOf(binding.etCantidadCalorias.getText());
+
+            ComidaBebida comidaBebida = new ComidaBebida();
+            comidaBebida.setNombre(nombreComida);
+            comidaBebida.setCantidadCalorias(cantidadCalorias);
+
+            Intent comidas = new Intent(this, ComidasActivity.class);
+            comidas.putExtra("comidaBebida",comidaBebida);
             startActivity(comidas);
         });
     }

@@ -45,10 +45,30 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bienvenido"
+                android:textSize="20dp"
+                android:layout_marginStart="10dp"/>
+            <TextView
+                android:id="@+id/nombreUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textSize="16dp"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComidas"
             android:layout_margin="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="400dp" />
 
         <!-- Resumen -->
         <TextView

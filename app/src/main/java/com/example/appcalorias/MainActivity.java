@@ -43,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
             String edad = String.valueOf(binding.edad.getText());
             String meta = String.valueOf(binding.spinnerMeta.getText());
             String nivel = String.valueOf(binding.spinnerNivelFisico.getText());
+            String nombreUsuario = String.valueOf(binding.nombre.getText());
 
             float tmb = calculoTMB(genero,peso,altura,edad,meta,nivel);
 
             Intent comidas = new Intent(this,ComidasActivity.class);
             comidas.putExtra("tmb",Float.toString(tmb));
+            comidas.putExtra("nombreUsuario",nombreUsuario);
             startActivity(comidas);
         });
     }
