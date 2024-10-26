@@ -14,8 +14,8 @@
     </string-array>
 
     <string-array name="metas">
-        <item>Subir de peso</item>
-        <item>Bajar de peso</item>
-        <item>Mantener peso</item>
+        <item>Subir</item>
+        <item>Bajar</item>
+        <item>Mantener</item>
     </string-array>
 </resources>

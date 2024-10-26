@@ -12,6 +12,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appcalorias.databinding.ActivityMainBinding;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
@@ -35,9 +37,50 @@ public class MainActivity extends AppCompatActivity {
         setupSpinnerMetas();
 
         binding.btnRegistrar.setOnClickListener(view -> {
+            String genero = String.valueOf(binding.spinnerGenero.getText());
+            String peso = String.valueOf(binding.peso.getText());
+            String altura = String.valueOf(binding.altura.getText());
+            String edad = String.valueOf(binding.edad.getText());
+            String meta = String.valueOf(binding.spinnerMeta.getText());
+            String nivel = String.valueOf(binding.spinnerNivelFisico.getText());
+
+            float tmb = calculoTMB(genero,peso,altura,edad,meta,nivel);
+
             Intent comidas = new Intent(this,ComidasActivity.class);
+            comidas.putExtra("tmb",Float.toString(tmb));
             startActivity(comidas);
         });
+    }
+
+    private float calculoTMB(String genero, String peso, String altura, String edad,String meta , String nivel){
+        float tmb;
+        if(Objects.equals(genero, "Hombre")){
+            tmb = 10*Integer.parseInt(peso) + 6.25f*Integer.parseInt(altura) - 5*Integer.parseInt(edad) + 5;
+        } else if (Objects.equals(genero, "Mujer")) {
+            tmb = 10*Integer.parseInt(peso) + 6.25f*Integer.parseInt(altura) - 5*Integer.parseInt(edad) -161;
+        }else {
+            tmb = 0;
+        }
+
+        if(Objects.equals(nivel,"Poco o Ningun Ejercicio")){
+            tmb = tmb*1.2f;
+        } else if (Objects.equals(nivel,"Ejercicio ligero(1–3 dias por semana)")) {
+            tmb = tmb*1.375f;
+        } else if (Objects.equals(nivel,"Ejercicio moderado(3–5 dias por semana)")) {
+            tmb = tmb*1.55f;
+        } else if (Objects.equals(nivel,"Ejercicio fuerte(6–7 dias por semana)")) {
+            tmb = tmb*1.725f;
+        } else if (Objects.equals(nivel,"Ejercicio muy fuerte(dos veces al dia,entrenamientos muy duros)")) {
+            tmb = tmb*1.9f;
+        }
+
+        if(Objects.equals(meta, "Bajar")){
+            tmb = tmb - 300;
+        } else if (Objects.equals(meta, "Subir")) {
+            tmb = tmb + 500;
+        }
+
+        return tmb;
     }
 
 
@@ -49,9 +92,9 @@ public class MainActivity extends AppCompatActivity {
         binding.spinnerGenero.setAdapter(adapter);
 
         // Establecer el primer genero por defecto
-        if (genero.length > 0) {
+        /*if (genero.length > 0) {
             binding.spinnerGenero.setText(genero[0], false);
-        }
+        }*/
     }
 
     private void setupSpinnerActividadFisica() {
@@ -62,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         binding.spinnerNivelFisico.setAdapter(adapter);
 
         // Establecer el primera nivel por defecto
-        if (nivelesFisico.length > 0) {
+        /*if (nivelesFisico.length > 0) {
             binding.spinnerNivelFisico.setText(nivelesFisico[0], false);
-        }
+        }*/
     }
 
     private void setupSpinnerMetas() {
@@ -75,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
         binding.spinnerMeta.setAdapter(adapter);
 
         // Establecer la primera meta por defecto
-        if (metas.length > 0) {
+        /*if (metas.length > 0) {
             binding.spinnerMeta.setText(metas[0], false);
-        }
+        }*/
     }
 }

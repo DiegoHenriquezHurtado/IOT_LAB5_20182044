@@ -27,6 +27,9 @@ public class ComidasActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });*/
+        Intent intent = getIntent();
+        String tmb = intent.getStringExtra("tmb");
+        binding.cantRecomendada.setText(tmb + " cal");
 
         binding.btnAddProduct.setOnClickListener(view -> {
             Intent nuevaComida = new Intent(this,NuevaComidaActivity.class);

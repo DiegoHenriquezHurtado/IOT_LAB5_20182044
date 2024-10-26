@@ -81,9 +81,10 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/cantConsumida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="96 cal"
+                    android:text="0 cal"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -104,6 +105,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/cantRecomendada"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4 cal"
