@@ -16,15 +16,6 @@
         android:gravity="center"
         android:foreground="?attr/selectableItemBackground">
 
-        <!-- Imagen del producto -->
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/productImage"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.RoundedCorners16dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop" />
-
         <!-- Nombre del producto -->
         <TextView
             android:id="@+id/nombreComida"

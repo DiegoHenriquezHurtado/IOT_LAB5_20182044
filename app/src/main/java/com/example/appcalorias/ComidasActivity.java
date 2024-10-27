@@ -2,6 +2,7 @@ package com.example.appcalorias;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +39,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ComidasActivity extends AppCompatActivity {
 
@@ -107,10 +110,26 @@ public class ComidasActivity extends AppCompatActivity {
             lanzarNotificacion();
         }
 
+        // Crear el canal de notificación
+        /*createNotificationChannel();
+
+        // Configurar las notificaciones
+        setupMealNotifications();*/
+
         //Boton para agregar comida o bebida
         binding.btnAddProduct.setOnClickListener(view -> {
             Intent nuevaComida = new Intent(this,NuevaComidaActivity.class);
             startActivity(nuevaComida);
+        });
+
+        binding.btnEstadisticas.setOnClickListener(view -> {
+            Intent estadisticas = new Intent(this,EstadisitcasActivity.class);
+            startActivity(estadisticas);
+        });
+
+        binding.btnNotifications.setOnClickListener(view -> {
+            Intent notificaciones = new Intent(this,ConfigurarNotificacionesActivity.class);
+            startActivity(notificaciones);
         });
     }
 
@@ -239,4 +258,52 @@ public class ComidasActivity extends AppCompatActivity {
             notificationManager.notify(1, builder.build());
         }
     }
+
+    /*private void scheduleNotification(String message, int hour, int minute, int requestCode) {
+        Log.d("NotificationSetup", "Programando notificación para las " + hour + ":" + minute);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this, NotificationReceiver.class);
+        intent.putExtra("message", message);
+
+        Log.d("NotificationSetup", "Intent message: " + message);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        if (calendar.getTimeInMillis() < System.currentTimeMillis()) {
+            // Si la hora programada ya pasó hoy, configura para el siguiente día
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        /*alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_DAY, // Se repite diariamente
+                pendingIntent
+        );
+
+        // Usar set() para programar una alarma única
+        alarmManager.set(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                pendingIntent
+        );
+    }
+
+    private void setupMealNotifications() {
+        // Notificación para el desayuno
+        scheduleNotification("¡Es hora de agregar tu desayuno!", 20, 36, 1);
+
+        // Notificación para el almuerzo
+        scheduleNotification("¡Es hora de agregar tu almuerzo!", 20, 37, 2);
+
+        // Notificación para la cena
+        scheduleNotification("¡Es hora de agregar tu cena!", 20, 38, 3);
+    }*/
+
 }
